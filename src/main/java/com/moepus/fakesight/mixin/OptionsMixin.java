@@ -1,5 +1,6 @@
 package com.moepus.fakesight.mixin;
 
+import com.moepus.fakesight.SharedConstant;
 import net.minecraft.client.OptionInstance;
 import net.minecraft.client.Options;
 import org.spongepowered.asm.mixin.Final;
@@ -21,6 +22,6 @@ public abstract class OptionsMixin {
     @Inject(method = "getEffectiveRenderDistance", at = @At("HEAD"), cancellable = true)
     private void moepus$forceLod(CallbackInfoReturnable<Integer> cir) {
         int rd = this.serverRenderDistance > 0 ? Math.min(this.renderDistance.get(), this.serverRenderDistance) : this.renderDistance.get();
-        cir.setReturnValue(Math.min(rd, 12));
+        cir.setReturnValue(Math.min(rd, SharedConstant.renderDistance));
     }
 }
